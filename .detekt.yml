@@ -1,0 +1,11 @@
+# For all rules see https://github.com/detekt/detekt/blob/master/detekt-core/src/main/resources/default-detekt-config.yml
+build:
+  maxIssues: 10
+formatting:
+  NoWildcardImports:
+    active: true
+  ImportOrdering:
+    active: true
+style:
+  WildcardImport:
+    active: true

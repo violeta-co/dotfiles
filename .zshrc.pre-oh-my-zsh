@@ -1,0 +1,43 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+# if which yarn; then export PATH=$PATH:$(yarn global bin); fi
+export DEFAULT_USER=violeta
+export EDITOR=vim
+export ZSH="/home/violeta/.oh-my-zsh"
+export GCP_E2E="e2e-testing-x"
+export GCP_DEV="development-x"
+export GCP_PRD="production-x"
+COMPLETION_WAITING_DOTS="true"
+DISABLE_UPDATE_PROMPT="true"
+DISABLE_MAGIC_FUNCTIONS=true
+plugins=(git sudo)
+source $ZSH/oh-my-zsh.sh
+# Aliases
+alias zshrc="vim ~/.zshrc && source ~/.zshrc"
+alias lsa="exa --long --header --git --all"
+alias ls="exa"
+alias pbcopy="xsel --clipboard --input"
+alias pbpaste="xsel --clipboard --output"
+# Git aliases
+alias gwp="git add --all && git commit -m 'wip' && git push"
+# K8 aliases
+alias kc="kubectl"
+alias kx="kubectx"
+function fwd-e2e {
+    kubectx e2e
+    kubectl port-forward db-mongodb-replicaset-x 27020:27017
+}
+function fwd-dev {
+    kubectx dev
+    kubectl port-forward db-mongodb-replicaset-x 27018:27017
+}
+function fwd-prd {
+    kubectx prd
+    kubectl port-forward db-mongodb-replicaset-x 27019:27017
+}
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
